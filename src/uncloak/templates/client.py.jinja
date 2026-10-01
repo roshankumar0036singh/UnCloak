@@ -1,0 +1,19 @@
+import httpx
+from typing import Any, Iterator, Optional
+from pydantic import BaseModel
+
+class ResponseModel(BaseModel):
+{% for k, v in properties.items() %}
+    {{ k }}: {{ v.type_str }}
+{% endfor %}
+
+class {{ client_name }}:
+    def __init__(self, client: Optional[httpx.Client] = None):
+        self.client = client or httpx.Client()
+        self.base_url = "https://{{ contract.endpoint.host }}"
+        
+    def request(self{% for p in path_params %}, {{ p.name }}: str{% endfor %}) -> ResponseModel:
+        url = self.base_url + f"{{ contract.endpoint.path_template }}"
+        response = self.client.request("{{ contract.endpoint.method }}", url)
+        response.raise_for_status()
+        return ResponseModel.model_validate(response.json())

@@ -34,13 +34,57 @@ def main(
 
 
 @app.command()
-def generate(url: str) -> None:
+def generate(url: str, output: str = "client.py") -> None:
     """
     Generate a client from a URL or HAR file.
     """
-    console.print(
-        f"[bold red]Not implemented:[/bold red] "
-        f"uncloak generate for {url} is not yet implemented.",
-        style="red",
+    import datetime
+
+    from uncloak.analyzer import extract_params
+    from uncloak.emitter import emit_client
+    from uncloak.filters import filter_captures
+    from uncloak.har import load_har
+    from uncloak.models import Contract
+    from uncloak.ranker import group_by_endpoint, rank_candidates
+    from uncloak.recorder import record_har
+    from uncloak.schema import infer_array_path, infer_schema
+
+    console.print(f"Recording HAR for {url}...")
+    har_path = "temp_capture.har"
+
+    # Simple check if it's a local HAR file vs a URL
+    if url.endswith(".har"):
+        har_path = url
+    else:
+        record_har(url, har_path)
+
+    console.print("Processing captures...")
+    captures = load_har(har_path)
+    filtered = filter_captures(captures)
+
+    candidates = group_by_endpoint(filtered)
+    ranked = rank_candidates(candidates)
+
+    if not ranked:
+        console.print("[bold red]Error:[/bold red] No valid API endpoints found.")
+        raise typer.Exit(1)
+
+    best = ranked[0]
+    endpoint = extract_params(best)
+    schema = infer_schema(best.captures)
+
+    contract = Contract(
+        version=1,
+        uncloak_version=__version__,
+        generated_at=datetime.datetime.now().isoformat(),
+        endpoint=endpoint,
+        response_schema=schema,
+        fields={},
+        array_path=infer_array_path(schema),
     )
-    raise typer.Exit(code=1)
+
+    code = emit_client(contract, "ApiClient")
+    with open(output, "w", encoding="utf-8") as f:
+        f.write(code)
+
+    console.print(f"[bold green]Success![/bold green] Generated {output}")

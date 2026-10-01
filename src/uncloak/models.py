@@ -1,6 +1,6 @@
 from typing import Any, Literal
 
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, ConfigDict, Field
 
 
 class Capture(BaseModel):
@@ -34,6 +34,8 @@ class Candidate(BaseModel):
 
 
 class ParamSpec(BaseModel):
+    model_config = ConfigDict(populate_by_name=True)
+
     name: str
     in_: Literal["query", "header", "path", "cookie"] = Field(alias="in")
     type: str = "string"
