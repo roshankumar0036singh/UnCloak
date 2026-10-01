@@ -32,8 +32,9 @@ def test_capture_model():
 
 def test_tolerances_defaults():
     t = Tolerances()
-    assert t.null_rate_increase_threshold == 0.1
-    assert t.allow_optional_field_removal is True
+    assert t.null_rate_increase == 0.15
+    assert t.min_items_ratio == 0.5
+    assert t.fail_on == "breaking"
 
 def test_contract_roundtrip():
     contract = Contract(

@@ -1,6 +1,8 @@
 from typing import Any, Literal
 
-from pydantic import BaseModel, ConfigDict, Field
+from pydantic import BaseModel, ConfigDict, Field, model_validator
+
+from uncloak.exceptions import ContractError
 
 
 class Capture(BaseModel):
@@ -66,8 +68,9 @@ class PaginationSpec(BaseModel):
 
 
 class Tolerances(BaseModel):
-    null_rate_increase_threshold: float = 0.1
-    allow_optional_field_removal: bool = True
+    null_rate_increase: float = 0.15
+    min_items_ratio: float = 0.5
+    fail_on: Literal["breaking", "warning"] = "breaking"
 
 
 class Contract(BaseModel):
@@ -81,6 +84,14 @@ class Contract(BaseModel):
     min_items: int = 0
     pagination: PaginationSpec | None = None
     tolerances: Tolerances = Field(default_factory=Tolerances)
+
+    @model_validator(mode="after")
+    def validate_version(self) -> "Contract":
+        if self.version > 1:
+            raise ContractError(
+                f"Unsupported contract version {self.version}. Please upgrade uncloak."
+            )
+        return self
 
 
 class Finding(BaseModel):
