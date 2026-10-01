@@ -142,7 +142,8 @@ def check(
 
         if not ranked:
             console.print(
-                f"  [red]Failed:[/red] No valid endpoints found. Expected: {expected_endpoint}"
+                f"  [red]Failed:[/red] No valid endpoints found. "
+                f"Expected: {expected_endpoint}"
             )
             continue
 
@@ -160,7 +161,8 @@ def check(
             score += 1
         else:
             console.print(
-                f"  [red]Failed:[/red] Inferred {endpoint.host}{endpoint.path_template}, Expected: {expected_parsed.netloc}{expected_template}"
+                f"  [red]Failed:[/red] Inferred {endpoint.host}{endpoint.path_template}, "
+                f"Expected: {expected_parsed.netloc}{expected_template}"
             )
 
     console.print(f"\\n[bold green]Score: {score}/{total}[/bold green]")
