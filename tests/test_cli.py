@@ -13,7 +13,7 @@ def test_cli_version():
 from unittest.mock import patch
 
 def test_cli_generate_no_endpoints():
-    with patch("uncloak.cli.record_har"):
+    with patch("uncloak.recorder.record_har"):
         result = runner.invoke(app, ["generate", "https://example.com"])
         assert result.exit_code != 0
         assert "no valid api endpoints found" in result.stdout.lower()
