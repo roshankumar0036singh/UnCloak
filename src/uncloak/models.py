@@ -97,4 +97,7 @@ class Contract(BaseModel):
 class Finding(BaseModel):
     code: str
     severity: Literal["breaking", "error", "warning", "info"]
+    path: str | None = None
     message: str
+    expected: Any | None = None
+    actual: Any | None = None

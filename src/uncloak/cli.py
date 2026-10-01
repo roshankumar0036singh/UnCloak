@@ -161,7 +161,8 @@ def check(
             score += 1
         else:
             console.print(
-                f"  [red]Failed:[/red] Inferred {endpoint.host}{endpoint.path_template}, "
+                f"  [red]Failed:[/red] Inferred "
+                f"{endpoint.host}{endpoint.path_template}, "
                 f"Expected: {expected_parsed.netloc}{expected_template}"
             )
 
