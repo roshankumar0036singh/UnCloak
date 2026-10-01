@@ -1,0 +1,46 @@
+# Analytics
+analytics.google.com
+google-analytics.com
+mixpanel.com
+amplitude.com
+segment.com
+segment.io
+heap.io
+matomo.cloud
+
+# Error tracking / observability
+sentry.io
+newrelic.com
+datadoghq.com
+bugsnag.com
+rollbar.com
+
+# Ads
+doubleclick.net
+facebook.com
+facebook.net
+criteo.com
+outbrain.com
+taboola.com
+adroll.com
+
+# Session recording / Heatmaps
+hotjar.com
+fullstory.com
+mouseflow.com
+crazyegg.com
+
+# Chat / Support
+intercom.io
+drift.com
+crisp.chat
+zendesk.com
+
+# Marketing
+hubspot.com
+marketo.com
+pardot.com
+
+# Tracking
+quantserve.com
+scorecardresearch.com

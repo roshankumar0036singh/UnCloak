@@ -1,0 +1,7 @@
+{
+  "correct_endpoint": "https://api.shop.local/v1/products?page=1",
+  "noise_domains": [
+    "analytics.google.com"
+  ],
+  "site_type": "ecommerce"
+}

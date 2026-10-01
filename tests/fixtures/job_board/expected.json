@@ -1,0 +1,7 @@
+{
+  "correct_endpoint": "https://api.jobs.local/v1/listings?page=1",
+  "noise_domains": [
+    "analytics.google.com"
+  ],
+  "site_type": "jobs"
+}

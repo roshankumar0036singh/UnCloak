@@ -1,0 +1,1 @@
+Some visible text for real_estate. Includes values like dict_values(['123 Main St', 500000])

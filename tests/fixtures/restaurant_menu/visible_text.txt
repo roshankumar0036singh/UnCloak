@@ -1,0 +1,1 @@
+Some visible text for restaurant. Includes values like dict_values(['Burger', 10.99])

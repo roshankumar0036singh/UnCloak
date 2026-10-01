@@ -1,0 +1,21 @@
+__pycache__/
+*.py[cod]
+*$py.class
+
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+
+.env
+venv/
+env/
+.venv/
+build/
+dist/
+*.egg-info/
+.hatch/
+
+# Project specific
+tests/fixtures_private/
+out/
+CONTEXT.md

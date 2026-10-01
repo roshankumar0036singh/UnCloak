@@ -1,0 +1,7 @@
+{
+  "correct_endpoint": "https://api.homes.local/v1/properties?page=1",
+  "noise_domains": [
+    "analytics.google.com"
+  ],
+  "site_type": "real_estate"
+}

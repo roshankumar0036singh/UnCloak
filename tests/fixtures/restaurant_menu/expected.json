@@ -1,0 +1,7 @@
+{
+  "correct_endpoint": "https://api.food.local/v1/menu",
+  "noise_domains": [
+    "analytics.google.com"
+  ],
+  "site_type": "restaurant"
+}

@@ -1,0 +1,7 @@
+{
+  "correct_endpoint": "https://api.news.local/v1/articles?page=1",
+  "noise_domains": [
+    "analytics.google.com"
+  ],
+  "site_type": "news"
+}
